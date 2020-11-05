@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:ListCollection="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:comboBox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms" xmlns:viewModel="clr-namespace:App1.ViewModels"
+             x:Class="App1.Views.TestCombo">
+    <ContentPage.BindingContext>
+        <viewModel:TestComboViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+           
+            <comboBox:SfComboBox x:Name="comboBox" MultiSelectMode="Token"  
+                    IsEditableMode="False"
+                    DisplayMemberPath="Name" 
+                    ImageMemberPath="AppImage" 
+                    Grid.Row="0" 
+                    MaximumDropDownHeight="180" 
+                    SuggestionMode="Contains"
+                    DataSource="{Binding DriverList}"
+                    IsSelectedItemsVisibleInDropDown="true"
+                    ItemPadding="0,0,10,0" 
+                    SelectedItem="{Binding ComboSelectionChanged,Mode=TwoWay}"
+                    DropDownItemHeight="60" 
+                    Watermark="Search Here">
+                <comboBox:SfComboBox.Behaviors>
+                    <viewModel:SelectionChangedBehavior/>
+                </comboBox:SfComboBox.Behaviors>
+
+                <comboBox:SfComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="15,10"
+                           BackgroundColor="Transparent"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"
+                           Orientation="Horizontal">
+
+                            <Label  Margin="10,5" Text="{Binding Name}" 
+                            VerticalOptions="Center"
+                            TextColor="Black"
+                            HorizontalOptions="Center" 
+                            FontSize="18" />
+                        </StackLayout>
+                    </DataTemplate>
+                </comboBox:SfComboBox.ItemTemplate>
+            </comboBox:SfComboBox>
+            <Button
+                BorderRadius="10"
+                Command="{Binding AddRoutePatrolCommand}"
+                Text="Add" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
